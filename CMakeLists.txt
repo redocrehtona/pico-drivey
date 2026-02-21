@@ -28,34 +28,35 @@ set(PICO_BOARD pico CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(drivey C CXX ASM)
+project(pico-drivey C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(drivey src/main.cpp src/drv.cpp)
+add_executable(pico-drivey src/main.cpp src/drv.cpp)
 
-pico_set_program_name(drivey "drivey")
-pico_set_program_version(drivey "0.1")
+pico_set_program_name(pico-drivey "pico-drivey")
+pico_set_program_version(pico-drivey "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(drivey 0)
-pico_enable_stdio_usb(drivey 1)
+pico_enable_stdio_uart(pico-drivey 0)
+pico_enable_stdio_usb(pico-drivey 1)
 
 # Add the standard library to the build
-target_link_libraries(drivey
-        pico_stdlib)
+target_link_libraries(pico-drivey
+        pico_stdlib
+        hardware_pwm)
 
 # Add the standard include files to the build
-target_include_directories(drivey PRIVATE
+target_include_directories(pico-drivey PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # Include the inluce directory
-target_include_directories(drivey PRIVATE
+target_include_directories(pico-drivey PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
-pico_add_extra_outputs(drivey)
+pico_add_extra_outputs(pico-drivey)
 
