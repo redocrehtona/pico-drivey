@@ -9,6 +9,7 @@ class DRV {
         uint8_t _channel_a;
         uint8_t _channel_b;
         uint32_t _wrap;
+        int _eep_pin;
     public:
         DRV(uint8_t pin_a, 
             uint8_t pin_b, 
@@ -19,6 +20,7 @@ class DRV {
         uint16_t getDuty();
         uint8_t getDutyPercent();
         bool setDuty(uint16_t duty, bool direction = 1); // direction: 1 for forward, 0 for reverse
+        void enable(bool state);
 };
 
 #endif

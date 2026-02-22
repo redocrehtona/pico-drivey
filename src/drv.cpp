@@ -5,7 +5,8 @@
 #include <cstdint>
 
 // Constructor
-DRV::DRV(uint8_t pin_a, uint8_t pin_b, uint32_t freq, float clkdiv, int eep_pin, bool eep_state)
+DRV::DRV(uint8_t pin_a, uint8_t pin_b, uint32_t freq, float clkdiv, int eep_pin, bool eep_state) : 
+    _eep_pin(eep_pin)
 {
     // Configure sleep pin if used
     if (eep_pin >= 0)
@@ -79,4 +80,10 @@ bool DRV::setDuty(uint16_t duty, bool direction)
         pwm_set_chan_level(_slice_b, _channel_b, duty);
     }
     return 0;
+}
+
+void DRV::enable(bool state) {
+    if (_eep_pin >= 0 && gpio_get(_eep_pin) != state) {
+        gpio_put(_eep_pin, state);
+    }
 }

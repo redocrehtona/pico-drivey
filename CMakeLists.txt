@@ -34,7 +34,7 @@ project(pico-drivey C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(pico-drivey src/main.cpp src/drv.cpp src/enc.cpp)
+add_executable(pico-drivey src/main.cpp src/drv.cpp src/enc.cpp src/pid.cpp src/i2c.cpp)
 
 pico_set_program_name(pico-drivey "pico-drivey")
 pico_set_program_version(pico-drivey "0.1")
@@ -51,7 +51,10 @@ target_link_libraries(pico-drivey
         pico_stdlib
         pico_multicore
         hardware_pio
-        hardware_pwm)
+        hardware_pwm
+        hardware_i2c
+        pico_i2c_slave
+        )
 
 # Add the standard include files to the build
 target_include_directories(pico-drivey PRIVATE
